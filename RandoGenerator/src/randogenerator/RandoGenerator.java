@@ -29,15 +29,19 @@ public class RandoGenerator {
         String locations;
         String output;
         String cutsceneLocations;
+        String critAbilities;
+        String critAbilitiesLocations;
         String doNotTouch;
         String path;
         
-        String seedName;
+        String input;
         
         LinkedList abilitiesList;
         LinkedList locationsList;
         LinkedList cutsceneLocationsList;
         LinkedList itemsList;
+        LinkedList critAbilitiesList;
+        LinkedList critAbilitiesLocationsList;
         LinkedList doNotTouchList;
         LinkedList finalList = new LinkedList();
         //randomize
@@ -58,6 +62,8 @@ public class RandoGenerator {
         abilities = "/Ability_Codes.txt";
         locations = "/Location_Codes.txt";
         cutsceneLocations = "/Cutscene_Codes.txt";
+        critAbilities = "/CritAbilities.txt";
+        critAbilitiesLocations = "/CritAbilitiesLocation.txt";
         doNotTouch = "/Level_Ups.txt";
 
         
@@ -66,18 +72,18 @@ public class RandoGenerator {
                 
         //ask for seed input
         System.out.print("Seed Name(Use 'random' for random seed): ");
-        seedName = s.nextLine();
+        input = s.nextLine();
         System.out.println();
         
  
         //generate random seed
-        if(seedName.equals("random")){
+        if(input.equals("random")){
             System.out.println("Using a random seed.");
             //System.out.println(rand.nextInt());
             //System.out.println(rand.nextInt());
         } else {
-            System.out.printf("Using %s as the seed name.\n", seedName);
-            rand.setSeed(seedName.hashCode());
+            System.out.printf("Using %s as the seed name.\n", input);
+            rand.setSeed(input.hashCode());
             //System.out.println(rand.nextInt());
         }
         
@@ -109,14 +115,17 @@ public class RandoGenerator {
 ***************************************/
         
 /**************Choose crit or not***************/
-        System.out.print("Is this a Critical Mode Playthrough: ");
+        System.out.print("Enter 1 if this is a Critical Mode Playthrough: ");
+        input = s.nextLine();
         
-        
-        
-        
-        
-        
-   
+        if(input.equals("1")){
+            critAbilitiesList = ListGenerator(path+critAbilities);
+            critAbilitiesLocationsList = ListGenerator(path+critAbilitiesLocations);
+        }else {
+            critAbilitiesList = null;
+            critAbilitiesLocationsList = null;
+        }
+
   /**************Choose crit or not***************/      
         /**** TEST BLOCK****/
         //System.out.println(B00BFileGenerator.class.getResource("/Files/Items.txt"));
@@ -131,8 +140,8 @@ public class RandoGenerator {
         
         //generating lists 
         //looks for relative path (local files)
-        abilitiesList = ListGenerator(path+abilities);
-        locationsList = ListGenerator(path+locations);
+        abilitiesList = ListGenerator(path+abilities, critAbilitiesList);
+        locationsList = ListGenerator(path+locations, critAbilitiesLocationsList);
         cutsceneLocationsList = ListGenerator(path+cutsceneLocations);
         itemsList = ListGenerator(path+items);
         doNotTouchList = ListGenerator(path+doNotTouch);
@@ -198,5 +207,14 @@ public class RandoGenerator {
             System.err.println(e);
         }
         return list;
-    }    
+    }
+    public static LinkedList ListGenerator(String name, LinkedList oldList) throws Exception {
+        LinkedList list;
+        
+        list = ListGenerator(name);
+        if (oldList != null){
+            list.addAll(oldList);
+        }
+        return list;
+    }
 }
