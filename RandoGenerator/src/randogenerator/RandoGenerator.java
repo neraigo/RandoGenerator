@@ -64,7 +64,7 @@ public class RandoGenerator {
         cutsceneLocations = "/Cutscene_Codes.txt";
         critAbilities = "/CritAbilities.txt";
         critAbilitiesLocations = "/CritAbilitiesLocation.txt";
-        doNotTouch = "/Level_Ups.txt";
+        doNotTouch = "/Do_Not_Touch.txt";
 
         
         Scanner s = new Scanner(System.in);
@@ -82,13 +82,11 @@ public class RandoGenerator {
             //System.out.println(rand.nextInt());
             //System.out.println(rand.nextInt());
         } else {
-            System.out.printf("Using %s as the seed name.\n", input);
+            System.out.printf("Using \"%s\" as the seed name.\n", input);
             rand.setSeed(input.hashCode());
             //System.out.println(rand.nextInt());
         }
         
-        
-/**REBEL DO YOUR WORK HERE**********
         String modeSelect;
         String keyblades = "/keyblades.txt";
         LinkedList keybladesMode;
@@ -105,18 +103,17 @@ public class RandoGenerator {
         
     //assumes that 1 or invalid character will be default 
         if(modeSelect.equals("2") || modeSelect.toLowerCase().equals("two")){
-            System.out.println("Activating Normalized Keyblade Mode.");
+            System.out.println("Activating Normalized Keyblade Mode.\n");
             keybladesMode = ListGenerator(path+keyblades);
             //adds the keyblade settings to the start of the file. this will not affect anything that follows but could be done at the end of the program as well.
             finalList.addAll(keybladesMode);
         } else {
-            System.out.println("Proceeding with Standard Keyblade Mode.");
+            System.out.println("Proceeding with Standard Keyblade Mode.\n");
         }
-***************************************/
-        
+     
 /**************Choose crit or not***************/
         System.out.print("Enter 1 if this is a Critical Mode Playthrough: ");
-        input = s.nextLine();
+        input = s.next();
         
         if(input.equals("1")){
             critAbilitiesList = ListGenerator(path+critAbilities);
@@ -155,7 +152,7 @@ public class RandoGenerator {
         
         */
         
-        
+/**************Start of Creating FinalList*********************************/           
         //shuffle items
         Collections.shuffle(itemsList, rand);
         //Add Items to cutscene Locations
@@ -174,7 +171,7 @@ public class RandoGenerator {
         }    
         //add donottouchme
         finalList.addAll(doNotTouchList);
-        
+/**************End of Creating FinalList*********************************/        
                       
         //fileoutput
         //File file = new File(System.getProperty("/"), output);
