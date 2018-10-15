@@ -108,8 +108,16 @@ public class RandoGenerator {
         }
 ***************************************/
         
+/**************Choose crit or not***************/
+        System.out.print("Is this a Critical Mode Playthrough: ");
         
         
+        
+        
+        
+        
+   
+  /**************Choose crit or not***************/      
         /**** TEST BLOCK****/
         //System.out.println(B00BFileGenerator.class.getResource("/Files/Items.txt"));
         //InputStream stream = B00BFileGenerator.class.getResourceAsStream("/Items.txt");
