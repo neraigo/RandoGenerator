@@ -14,6 +14,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Random;
 import java.util.Scanner;
+//import org.apache.commons.lang3.RandomStringUtils;
 
 /**
  *
@@ -34,6 +35,7 @@ public class RandoGenerator {
         String doNotTouch;
         String path;
         
+        String seedName;
         String input;
         
         LinkedList abilitiesList;
@@ -55,8 +57,7 @@ public class RandoGenerator {
         //specific output for relative path location
         output = dir.toString() + "/F266B00B.pnach";
         path = dir.toString() + "/Files";
-        
-        
+             
         //output = "F266B00B.pnach";
         items = "/Items.txt";
         abilities = "/Ability_Codes.txt";
@@ -64,80 +65,43 @@ public class RandoGenerator {
         cutsceneLocations = "/Cutscene_Codes.txt";
         critAbilities = "/CritAbilities.txt";
         critAbilitiesLocations = "/CritAbilitiesLocation.txt";
-        doNotTouch = "/Level_Ups.txt";
-
-        
+        doNotTouch = "/Do_Not_Touch.txt";
+    
         Scanner s = new Scanner(System.in);
-        Random rand = new Random();
+        Random rand;// = new Random();
                 
         //ask for seed input
         System.out.print("Seed Name(Use 'random' for random seed): ");
         input = s.nextLine();
         System.out.println();
         
- 
-        //generate random seed
+        //generate seedName
         if(input.equals("random")){
-            System.out.println("Using a random seed.");
-            //System.out.println(rand.nextInt());
-            //System.out.println(rand.nextInt());
+           // seedName = RandomStringUtils.randomAlphabetic(8);
+            seedName = "butts";
         } else {
-            System.out.printf("Using %s as the seed name.\n", input);
-            rand.setSeed(input.hashCode());
-            //System.out.println(rand.nextInt());
+            seedName = input;
         }
-        
-        
-/**REBEL DO YOUR WORK HERE**********
-        String modeSelect;
-        String keyblades = "/keyblades.txt";
-        LinkedList keybladesMode;
-    //prompt for normal or not (keyblade)
-        System.out.println();
-        System.out.println("Normalized Keyblade Mode takes all the Keyblades and preserves their abilities, but makes every Keyblade do the same damage as Kingdom Key.\n");
-        System.out.print("Press 1 for Standard Keyblade Mode, 2 for Normalized Keyblade Mode: ");
-
-    //read input
-        //could read input as integer but thats not as safe. 
-        //reading it as a string allows some flexibility to avoid a crash
-        modeSelect = s.next();
-        System.out.println();
-        
-    //assumes that 1 or invalid character will be default 
-        if(modeSelect.equals("2") || modeSelect.toLowerCase().equals("two")){
-            System.out.println("Activating Normalized Keyblade Mode.");
-            keybladesMode = ListGenerator(path+keyblades);
-            //adds the keyblade settings to the start of the file. this will not affect anything that follows but could be done at the end of the program as well.
-            finalList.addAll(keybladesMode);
-        } else {
-            System.out.println("Proceeding with Standard Keyblade Mode.");
-        }
-***************************************/
-        
+        //set rand with the seedName
+        rand = new Random(seedName.hashCode());
+        System.out.printf("Using \"%s\" as the seed name.\n\n", seedName);
 /**************Choose crit or not***************/
         System.out.print("Enter 1 if this is a Critical Mode Playthrough: ");
         input = s.nextLine();
+        System.out.println();
         
         if(input.equals("1")){
+            System.out.println("Adding Crit Abilities.\n");
             critAbilitiesList = ListGenerator(path+critAbilities);
             critAbilitiesLocationsList = ListGenerator(path+critAbilitiesLocations);
         }else {
+            System.out.println("Proceeding with a non Crit playthrough");
             critAbilitiesList = null;
             critAbilitiesLocationsList = null;
         }
 
   /**************Choose crit or not***************/      
-        /**** TEST BLOCK****/
-        //System.out.println(B00BFileGenerator.class.getResource("/Files/Items.txt"));
-        //InputStream stream = B00BFileGenerator.class.getResourceAsStream("/Items.txt");
-        //System.out.println(stream!=null);
-        //stream = B00BFileGenerator.class.getClass().getResourceAsStream("Files/Items.txt");
-                //System.out.println(stream!=null);
-        //System.out.println(path);  
-
-        //System.out.println(path+items);
-                
-        
+       
         //generating lists 
         //looks for relative path (local files)
         abilitiesList = ListGenerator(path+abilities, critAbilitiesList);
@@ -154,9 +118,10 @@ public class RandoGenerator {
         doNotTouchList = ListGenerator(doNotTouch);
         
         */
-        
-        
+               
         //shuffle items
+        //System.out.println(rand.nextInt());
+        //System.out.println(rand.nextInt());
         Collections.shuffle(itemsList, rand);
         //Add Items to cutscene Locations
         //use of list.pollFirst() so that it removes items that are added
