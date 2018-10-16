@@ -14,7 +14,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Random;
 import java.util.Scanner;
-//import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.RandomStringUtils;
 
 /**
  *
@@ -29,6 +29,7 @@ public class RandoGenerator {
         String items;
         String locations;
         String output;
+        String spoiler;
         String cutsceneLocations;
         String critAbilities;
         String critAbilitiesLocations;
@@ -56,6 +57,7 @@ public class RandoGenerator {
         
         //specific output for relative path location
         output = dir.toString() + "/F266B00B.pnach";
+        spoiler = dir.toString() + "/Spoiler.txt";
         path = dir.toString() + "/Files";
              
         //output = "F266B00B.pnach";
@@ -77,8 +79,8 @@ public class RandoGenerator {
         
         //generate seedName
         if(input.equals("random")){
-           // seedName = RandomStringUtils.randomAlphabetic(8);
-            seedName = "butts";
+            seedName = RandomStringUtils.randomAlphabetic(8);
+            //seedName = "butts";
         } else {
             seedName = input;
         }
@@ -149,6 +151,11 @@ public class RandoGenerator {
             for(int i = 0; i < finalList.size(); i++){
                 writer.println(finalList.get(i));
             }
+            
+            //make spoiler file
+            writer = new PrintWriter(spoiler, "UTF-8");
+            writer.printf("The seed name was: \"%s\"", seedName);
+            
             writer.close();        
         } catch (Exception e){
             System.err.println(e);
