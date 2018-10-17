@@ -159,14 +159,15 @@ public class RandoGenerator {
         
             PrintWriter writer = new PrintWriter(output, "UTF-8");
             for(int i = 0; i < finalList.size(); i++){
+                System.out.println(finalList.get(i));
                 writer.println(finalList.get(i));
             }
-            
+            writer.close();    
             //make spoiler file
             writer = new PrintWriter(spoiler, "UTF-8");
             writer.printf("The seed name was: \"%s\"", seedName);
-            
-            writer.close();        
+            writer.close();
+    
         } catch (Exception e){
             System.err.println(e);
         }
