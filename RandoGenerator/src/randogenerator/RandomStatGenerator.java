@@ -46,14 +46,8 @@ public class RandomStatGenerator {
         
         for(int i = 0; i < list.size(); i++){
             
-            stats.add(list.get(i).toString()+RandomStatString());
+        stats.add(list.get(i).toString()+RandomStatString());
             //System.out.println(list.get(i).toString());
-            //randomize
-            //System.out.println(StatToString(def));
-            //System.out.println(RandomStatString(ap,def,mag,str,rand));
-            //System.out.println(RandomStatString(ap, def,mag,str, rand));
-            //System.out.println(rand.nextInt((3-0) + 1) + 0);
-            //System.out.println(Integer.toHexString(mag+6));
         }
         
         //System.out.println(Integer.toHexString(mag));
@@ -68,10 +62,10 @@ public class RandomStatGenerator {
     public String RandomStatString(){
         //roll between 0-3
         int range = ((3 - 0) + 1) + 0;        
-        ap = ap+rand.nextInt(range);
-        def = def+rand.nextInt(range);
-        mag = mag+rand.nextInt(range);
-        str = str+rand.nextInt(range);
+        ap += rand.nextInt(range);
+        def += rand.nextInt(range);
+        mag += rand.nextInt(range);
+        str += rand.nextInt(range);
         
         //return (StatToString(ap+rand.nextInt(range))+StatToString(def+rand.nextInt(range))+StatToString(mag+rand.nextInt(range))+StatToString(str+rand.nextInt(range)));
         
