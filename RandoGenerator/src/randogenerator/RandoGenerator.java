@@ -35,6 +35,7 @@ public class RandoGenerator {
         String critAbilitiesLocations;
         String doNotTouch;
         String path;
+        String levels;
         
         String seedName;
         String input;
@@ -45,6 +46,7 @@ public class RandoGenerator {
         LinkedList itemsList;
         LinkedList critAbilitiesList;
         LinkedList critAbilitiesLocationsList;
+        LinkedList levelsList;
         LinkedList doNotTouchList;
         LinkedList finalList = new LinkedList();
         //randomize
@@ -67,7 +69,10 @@ public class RandoGenerator {
         cutsceneLocations = "/Cutscene_Codes.txt";
         critAbilities = "/CritAbilities.txt";
         critAbilitiesLocations = "/CritAbilitiesLocation.txt";
+        levels = "/Levels.txt";
         doNotTouch = "/Do_Not_Touch.txt";
+        
+        RandomStatGenerator randStats;
     
         Scanner s = new Scanner(System.in);
         Random rand;// = new Random();
@@ -110,6 +115,10 @@ public class RandoGenerator {
         locationsList = ListGenerator(path+locations, critAbilitiesLocationsList);
         cutsceneLocationsList = ListGenerator(path+cutsceneLocations);
         itemsList = ListGenerator(path+items);
+        //levelsList = 
+        //RandomizeStats(path+levels, rand);
+        randStats = new RandomStatGenerator(0x00, 0x02, 0x06, 0x02, rand, ListGenerator(path+levels));
+        levelsList = randStats.RandomizeStats(rand);
         doNotTouchList = ListGenerator(path+doNotTouch);
         
         /* Looks for absolute path in jar file, edit line in ListGenerator if using this.
@@ -140,6 +149,7 @@ public class RandoGenerator {
             finalList.add(locationsList.get(i).toString() + abilitiesList.get(i).toString());
         }    
         //add donottouchme
+        finalList.addAll(levelsList);
         finalList.addAll(doNotTouchList);
         
                       
@@ -151,12 +161,12 @@ public class RandoGenerator {
             for(int i = 0; i < finalList.size(); i++){
                 writer.println(finalList.get(i));
             }
-            
+            writer.close();    
             //make spoiler file
             writer = new PrintWriter(spoiler, "UTF-8");
             writer.printf("The seed name was: \"%s\"", seedName);
-            
-            writer.close();        
+            writer.close();
+    
         } catch (Exception e){
             System.err.println(e);
         }
