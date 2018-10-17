@@ -159,7 +159,6 @@ public class RandoGenerator {
         
             PrintWriter writer = new PrintWriter(output, "UTF-8");
             for(int i = 0; i < finalList.size(); i++){
-                System.out.println(finalList.get(i));
                 writer.println(finalList.get(i));
             }
             writer.close();    
