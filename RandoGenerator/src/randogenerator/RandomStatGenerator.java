@@ -61,7 +61,7 @@ public class RandomStatGenerator {
     }
     public String RandomStatString(){
         //roll between 0-3
-        int range = ((3 - 0) + 1) + 0;        
+        int range = ((2 - 0) + 1) + 0;        
         ap += rand.nextInt(range);
         def += rand.nextInt(range);
         mag += rand.nextInt(range);
